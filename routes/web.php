@@ -55,9 +55,9 @@ Route::post('/logout', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
-
-
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
     Route::get('/opt', OptComponent::class)->name('opt');
     Route::get('/gejala', GejalaComponent::class)->name('gejala');
     Route::get('/basis_pengetahuan', BasisPengetahuanComponent::class)->name('basis_pengetahuan');
