@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\GejalaComponent;
 use App\Http\Livewire\ProfileComponent;
 use App\Http\Livewire\BasisPengetahuanComponent;
+use App\Http\Livewire\KonsultasiComponent;
 use App\Http\Livewire\RiwayatComponent;
 
 
@@ -53,7 +54,10 @@ Route::post('/logout', function () {
     return redirect()->route('login');
 })->name('logout');
 
-
+Route::get('/', function () {
+    return view('halaman');
+})->name('utama');
+Route::get('/konsultasi', KonsultasiComponent::class)->name('konsultasi');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
