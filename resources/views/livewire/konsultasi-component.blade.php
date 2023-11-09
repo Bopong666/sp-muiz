@@ -236,7 +236,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($m[count($m) - 1] as $item)
+                        @foreach ($hasilRanking as $item)
                         <tr>
                             <td>m{{ count($m) }}(
                                 @if (is_array($item['kd']))
