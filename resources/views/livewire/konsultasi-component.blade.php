@@ -1,5 +1,5 @@
 <div class="bg-white p-3 min-vh-100 col-md-12 rounded shadow-sm">
-    <div class="card-body overflow-auto">
+    <div class="card-body">
         @if (!$selesaiPerhitungan)
         <form wire:submit.prevent="perhitungan">
             <div class="" id="pertama">
@@ -23,19 +23,21 @@
                         document.getElementById('kedua').style.display='block'; ">Selanjutnya</button>
             </div>
             <div class="" id="kedua" style="display: none;">
-                <p class="fs-5 fw-bold">Pilih lah gejala-gejala yang dialami minimal 1 gejala</p>
+                <p class="fs-5 fw-bold">Pilih lah gejala-gejala yang dialami minimal 2 gejala</p>
                 @error('gejala_id')
                 <small class="text-danger">{{ $message }}</small>
                 <br>
                 @enderror
-                @foreach ($gejalas as $key => $gejala)
-                <input type="checkbox" class="form-check-input" wire:model.defer="gejala_id.{{ $gejala->id }}"
-                    value="{{ $gejala->id }}">
-                <label class="form-check-label fs-6" for="validationFormCheck1">
-                    {{ $gejala->kode_gejala }}
-                    {{$gejala->nama_gejala}}</label>
-                <br>
-                @endforeach
+                <div class="overflow-auto">
+                    @foreach ($gejalas as $key => $gejala)
+                    <input type="checkbox" class="form-check-input" wire:model.defer="gejala_id.{{ $gejala->id }}"
+                        value="{{ $gejala->id }}">
+                    <label class="form-check-label fs-6" for="validationFormCheck1">
+                        {{ $gejala->kode_gejala }}
+                        {{$gejala->nama_gejala}}</label>
+                    <br>
+                    @endforeach
+                </div>
                 <div class="d-flex justify-content-between mt-3">
                     <button type="button" class="btn btn-secondary" style="float: left;" onclick="document.getElementById('pertama').style.display='block' ;
                                 document.getElementById('kedua').style.display='none' ;">Kembali</button>
@@ -51,7 +53,7 @@
                 <button class="btn btn-primary" onclick="toggle()">Lihat perhitungan</button>
             </div>
 
-            <div class="" id="buka" style="display: none;">
+            <div class="overflow-auto" id="buka" style="display: none;">
                 <table class="table mt-3">
                     <thead>
                         <tr>
@@ -257,45 +259,43 @@
                         @endforeach
                     </tbody>
                 </table>
-
-
-
+                Hasil yang diperoleh merupakan {{ $opt['nama_opt'] }} dengan nilai densitas tertinggi pada perhitungan
+                sistem pakar ini yakni {{ round($hasilRanking[0]['nilai'], 4) }}.
             </div>
+            <div class="table-responsive">
+                <table class="table ">
+                    <thead class="text-center">
+                        <tr>
+                            <th colspan="2" class="fs-4">Hasil Diagnosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">Nama Lengkap</td>
+                            <td>
+                                {{$nama}}
+                            </td>
 
+                        </tr>
+                        <tr>
+                            <td scope="row">Alamat</td>
+                            <td>{{ $alamat }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Tanaman kemungkinan terkena penyakit/hama </td>
+                            <td>{{ $opt['nama_opt'] }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Solusi</td>
+                            <td>
+                                <p style="white-space: pre">{{$opt->solusi}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <button class="btn btn-md btn-success ms-1" style="float: right" wire:click="cetak">Cetak
                 Hasil</button>
-            <table class="table">
-                <thead class="text-center">
-                    <tr>
-                        <th colspan="2" class="fs-4">Hasil Diagnosa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td scope="row">Nama Lengkap</td>
-                        <td>
-                            {{$nama}}
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td scope="row">Alamat</td>
-                        <td>{{ $alamat }}</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Tanaman kemungkinan terkena penyakit/hama </td>
-                        <td>{{ $opt['nama_opt'] }} dengan nilai = {{
-                            round($hasilRanking[0]['nilai'], 4) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Solusi</td>
-                        <td>
-                            <p style="white-space: pre">{{$opt->solusi}}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
 
         </div>
         @endif

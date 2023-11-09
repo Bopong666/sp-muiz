@@ -50,7 +50,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbar-navlist">
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Login</a>
+                        <a class="nav-link" href="{{url('login')}}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#panduan">Panduan</a>
                     </li>
                 </ul>
 
@@ -105,7 +108,7 @@
     </div>
     <!-- END HOME -->
 
-    <!-- START FEATURE  -->
+    <!-- START DEFINISI  -->
     <section class="section">
         <div class="container">
             <div class="row align-items-center">
@@ -129,7 +132,7 @@
                 <!--end col-->
                 <div class="col-lg-6 offset-lg-1">
                     <div class="text-center mt-5 mt-lg-0">
-                        <img src="{{ asset('user/images/features.png') }}" alt="Features" class="img-fluid">
+                        <img src="{{ asset('user/images/jambu.png') }}" alt="Features" class="img-fluid">
                     </div>
                 </div>
                 <!--end col-->
@@ -138,7 +141,51 @@
         </div>
         <!--end container-->
     </section>
-    <!-- END FEATURE -->
+    <!-- END DEFNISI-->
+
+    <!-- START PANDUAN  -->
+    <section class="section" id="panduan">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="features-box">
+                    <h3 class="mb-4 text-center">Panduan</h3>
+                    <div class="row d-flex justify-content-center">
+                        <div class="card text-start mt-2 mt-md-0 col-md-3 me-md-3">
+                            <div class="card-header text-center" style="background-color: white;">1</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Mengisi data</h4>
+                                <p class="card-text">Proses awal yang perlu Anda lakukan setelah masuk ke dalam
+                                    halaman konsultasi adalah mengisi informasi pribadi Anda. Ini mencakup data tentang
+                                    nama dan alamat serta gejala-gejala yang dialami dengan minimal 2 gejala.</p>
+                            </div>
+                        </div>
+                        <div class="card text-start mt-2 mt-md-0 col-md-3 me-md-3">
+                            <div class="card-header text-center" style="background-color: white;">2</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Proses evaluasi</h4>
+                                <p class="card-text">Proses evaluasi data gejala yang telah Anda masukkan menjadi tahap
+                                    berikutnya dalam penggunaan sistem pakar ini. Walaupun proses ini memerlukan waktu,
+                                    hal ini sangat penting
+                                    karena akan menentukan hasil diagnosa akhir yang Anda terima.</p>
+                            </div>
+                        </div>
+                        <div class="card text-start mt-2 mt-md-0  col-md-3">
+                            <div class="card-header text-center" style="background-color: white;">3</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Hasil konsultasi</h4>
+                                <p class="card-text">Hasil yang diberikan adalah rekomendasi berdasarkan gejala
+                                    yang Anda tentukan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end feature-box-->
+            </div>
+            <!--end row-->
+        </div>
+        <!--end container-->
+    </section>
+    <!-- END PANDUAN -->
 
     <!-- START FOOTER -->
     <footer class="bg-dark section">
