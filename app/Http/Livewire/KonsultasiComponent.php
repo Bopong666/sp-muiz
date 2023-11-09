@@ -52,8 +52,8 @@ class KonsultasiComponent extends Component
         $dataGejala = $this->validate([
             'gejala_id' => 'required|array|min:2',
         ], [
-            'gejala_id.min' => 'Minimal 1 gejala',
-            'gejala_id.required' => 'Harap pilih gejala minimal 2'
+            'gejala_id.min' => 'Minimal 2 gejala',
+            'gejala_id.required' => 'Harap mengisi kolom ini'
         ]);
         // $this->gejala_id = [2, 3, 4];
 
@@ -73,7 +73,7 @@ class KonsultasiComponent extends Component
             $this->rules[$i]['belief'] = $dataGejala->bobot_gejala;
             $this->rules[$i]['plausibility'] = 1 - $dataGejala->bobot_gejala;
             $i++;
-        }		
+        }
         $jumlahM = 0;
         foreach ($this->rules as $key => $item) {
             if ($jumlahM == 0) {
@@ -149,7 +149,7 @@ class KonsultasiComponent extends Component
                     unset($this->sementara[$genap][$item]);
                 }
 
-                // Membuat M baru                
+                // Membuat M baru
                 foreach ($this->sementara[$genap] as $item) {
 
                     $this->m[$genap + 2][] = [
@@ -164,7 +164,7 @@ class KonsultasiComponent extends Component
 
 
         $this->hasilRanking = $this->m[array_key_last($this->m)];
-        array_multisort(array_column($this->hasilRanking, 'nilai'), SORT_DESC, $this->hasilRanking);	
+        array_multisort(array_column($this->hasilRanking, 'nilai'), SORT_DESC, $this->hasilRanking);
         $this->opt = Opt::where('kode', $this->hasilRanking[0]['kd'])->first();
         Riwayat::create([
             'nama' => $this->nama,
