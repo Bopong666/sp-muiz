@@ -5,14 +5,16 @@ namespace App\Http\Livewire;
 use App\Models\Opt;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class OptComponent extends Component
 {
     use WithPagination;
-
+    use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    public $kode, $jenis, $nama_opt, $solusi;
+    public $kode, $jenis, $nama_opt, $solusi, $foto, $old_foto;
     public $idTerpilih, $idHapus;
 
     public $options = 'Tambah';
@@ -29,7 +31,7 @@ class OptComponent extends Component
 
     public function resetInput()
     {
-        $this->reset(['kode', 'jenis', 'nama_opt', 'solusi', 'idTerpilih', 'idHapus', 'options']);
+        $this->reset(['kode', 'jenis', 'nama_opt', 'solusi', 'foto' , 'idTerpilih', 'idHapus', 'options', 'old_foto']);
     }
 
     public function store()
@@ -41,12 +43,24 @@ class OptComponent extends Component
                     'jenis' => 'required',
                     'nama_opt' => 'required|string',
                     'solusi' => 'required',
+                    'foto' => 'sometimes|image',
                 ],
                 [
                     '*.required' => 'Harap di isi',
                     'kode.unique' => 'Kode sudah ada',
+                    '*.image' => 'Hanya bisa gambar',
                 ]
             );
+            if($this->foto){
+            $fot = Opt::select('foto')->first($this->idTerpilih);
+            $fileName = $data['foto']->hashName();
+            if(file_exists($this->old_foto)){
+
+                unlink($this->old_foto);
+            }
+            $data['foto']->store('foto',  'public');
+            $data['foto'] = 'foto/'.$data['foto']->hashName();
+        }
         } else {
             $data = $this->validate(
                 [
@@ -54,12 +68,18 @@ class OptComponent extends Component
                     'jenis' => 'required',
                     'nama_opt' => 'required|string',
                     'solusi' => 'required',
+                    'foto' => 'required|image',
+
                 ],
                 [
                     '*.required' => 'Harap di isi',
                     'kode.unique' => 'Kode sudah ada',
+                    '*.image' => 'Hanya bisa gambar',
                 ]
             );
+            $fileName = $data['foto']->hashName();
+            $data['foto']->store('foto',  'public');
+            $data['foto'] = 'foto/'.$data['foto']->hashName();
         }
         Opt::updateOrCreate(['id' => $this->idTerpilih], $data);
         session()->flash('message', $this->idTerpilih ? 'Data berhasil diubah' : 'Data berhasil ditambah');
@@ -78,6 +98,7 @@ class OptComponent extends Component
         $this->jenis = $data->jenis;
         $this->nama_opt = $data->nama_opt;
         $this->solusi = $data->solusi;
+        $this->old_foto = $data->foto;
         $this->options = 'Edit';
         $this->dispatchBrowserEvent('modal-edit');
     }
@@ -90,8 +111,9 @@ class OptComponent extends Component
 
     public function hapus($id)
     {
-        Opt::destroy($id);
-
+        $data = Opt::find($id);
+        unlink($data->foto);
+        $data->delete();
         session()->flash('message', 'Data berhasil dihapus');
 
         $this->dispatchBrowserEvent('modal-delete');

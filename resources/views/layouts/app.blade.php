@@ -55,7 +55,7 @@
                                 <li class="nk-menu-item  {{ request()->routeIs('opt') ? 'active' : '' }}">
                                     <a href="{{ route('opt') }}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-bugs"></em></span>
-                                        <span class="nk-menu-text">Data Penyakit dan Hama</span>
+                                        <span class="nk-menu-text">Data OPT</span>
                                     </a>
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item  {{ request()->routeIs('basis_pengetahuan') ? 'active' : '' }}">
@@ -178,23 +178,23 @@
 
 
     <script>
-        window.addEventListener('modal-store',()=>{                             
-                $('#toastId').toast('show');                       
+        window.addEventListener('modal-store',()=>{
+                $('#toastId').toast('show');
                 $('#modelId').modal('hide');
                 });
-        window.addEventListener('modal-edit',()=>{            
-                    $('#modelId').modal('show');                
-                });    
-        window.addEventListener('tersimpan',()=>{                                                 
+        window.addEventListener('modal-edit',()=>{
+                    $('#modelId').modal('show');
+                });
+        window.addEventListener('tersimpan',()=>{
                     $('#toastId').toast('show');
                 });
-        window.addEventListener('modal-deleteConfirm',()=>{   
+        window.addEventListener('modal-deleteConfirm',()=>{
             $('#deleteId').modal('show');
-        }); 
-        window.addEventListener('modal-delete',()=>{  
-            $('#deleteId').modal('hide');   
-            $('#toastDeleteId').toast('show');            
-            });              
+        });
+        window.addEventListener('modal-delete',()=>{
+            $('#deleteId').modal('hide');
+            $('#toastDeleteId').toast('show');
+            });
     </script>
 </body>
 

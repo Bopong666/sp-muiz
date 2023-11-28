@@ -32,6 +32,7 @@
                     <thead class="thead-dark">
 
                         <th scope="col" class="text-capitalize">No</th>
+                        <th class="text-capitalize">Foto</th>
                         <th class="text-capitalize">Kode </th>
                         <th class="text-capitalize">Jenis</th>
                         <th class="text-capitalize">Nama OPT</th>
@@ -46,6 +47,11 @@
                                 $lists->perpage()
                                 + $loop->index + 1
                                 }}</td>
+                            <td class="text-center">
+
+                                <img src="{{ asset($item->foto) }}" class="img-fluid rounded-top" alt="">
+                            </td>
+
                             <td class="text-center">{{ $item->kode }}</td>
                             <td class="text-center text-capitalize">{{ $item->jenis }}</td>
                             <td class="text-start">{{ $item->nama_opt }}</td>
@@ -131,6 +137,19 @@
                                                     wire:model.defer="solusi" rows="8"
                                                     placeholder="Kasih Racun"></textarea>
                                                 @error('solusi')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="inputName" class="col-sm-4 col-form-label">Foto</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="file" class="form-control" wire:model.defer="foto"
+                                                    aria-describedby="fileHelpId">
+                                                @error('foto')
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>

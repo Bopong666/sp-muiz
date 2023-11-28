@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Livewire\LoginTest;
 use App\Http\Livewire\OptComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\GejalaComponent;
 use App\Http\Livewire\ProfileComponent;
-use App\Http\Livewire\BasisPengetahuanComponent;
-use App\Http\Livewire\KonsultasiComponent;
 use App\Http\Livewire\RiwayatComponent;
+use App\Http\Livewire\KonsultasiComponent;
+use App\Http\Livewire\BasisPengetahuanComponent;
 
 
 /*
@@ -67,4 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/basis_pengetahuan', BasisPengetahuanComponent::class)->name('basis_pengetahuan');
     Route::get('/riwayat', RiwayatComponent::class)->name('riwayat');
     Route::get('/profil', ProfileComponent::class)->name('profil');
+});
+Route::get('/logintest', LoginTest::class)->name('logintest');
+Route::get('/berhasil', function(){
+    return view('berhasil');
 });

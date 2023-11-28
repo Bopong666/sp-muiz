@@ -271,6 +271,15 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td colspan="2">
+                                <div class="d-flex justify-content-center">
+                                    <img src="{{ asset($opt->foto) }}" class="img-fluid rounded-top" alt=""
+                                        style="width: 25rem">
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
                             <td scope="row">Nama Lengkap</td>
                             <td>
                                 {{$nama}}
@@ -288,15 +297,16 @@
                         <tr>
                             <td scope="row">Solusi</td>
                             <td>
-                                <p style="white-space: pre">{{$opt->solusi}}</p>
+                                <p>{{$opt->solusi}}</p>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <button class="btn btn-md btn-success ms-1" style="float: right" wire:click="cetak">Cetak
-                Hasil</button>
-
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-md btn-success ms-1" wire:click="cetak">Cetak
+                    Hasil</button>
+            </div>
         </div>
         @endif
 
